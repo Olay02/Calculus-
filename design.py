@@ -1,5 +1,16 @@
 import customtkinter as ctk
 
+appearence = True
+
+def  mode():
+    global appearence
+    if appearence:
+        ctk.set_appearance_mode('dark')
+        appearence = False
+    else:
+        ctk.set_appearance_mode('light')
+        appearence = True
+
 
 
 #create window
@@ -14,7 +25,7 @@ opt_label = ctk.CTkLabel(window, text = 'a ctk label jit',
 opt_label.pack()
 
 button = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white', command = lambda: ctk.set_appearance_mode('dark') )
+                        text_color='white', command = mode)
 button.pack()
 
 # run
