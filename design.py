@@ -1,7 +1,10 @@
 import customtkinter as ctk
-
+import tkinter as tk
 # True for light mode
 appearence = True
+
+WHITE = "#FFFFFF"
+DIGITS_FONT = ("Arial", 24, "bold")
 
 # func to change modes
 def  mode():
@@ -13,67 +16,68 @@ def  mode():
         ctk.set_appearance_mode('light')
         appearence = True
 
+def on_button_click(value):
+    current_text = entry_var.get()
+    entry_var.set(current_text + str(value))
 
-#create window
-window = ctk.CTk()
-window.title("Calculator")
-window.geometry('400x700')
-window.resizable(False, False)
+class Calculator:
 
-# widgets
-opt_label = ctk.CTkLabel(window, text = 'a ctk label jit', 
-                         fg_color=('white', 'black'), text_color= ('black', 'white'),
-                         corner_radius= 10,)
+    def __init__(self) -> None:
+        self.window = ctk.CTk()
+        self.window.title("Calculator")
+        self.window.geometry('400x700')
+        self.window.resizable(False, False)
 
-button1 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white',border_color= 'black',
-                        border_width= 3, command = mode)
+        self.total = "0"
+        self.current_exp = "0"
+        self.display_frame = self.create_display_frame()
+        self.total_label, self.curr_label = self.create_display_labels()
 
-button2 = ctk.CTkButton(window, text= 'a btton 1', fg_color='blue',
-                        text_color='white')
+        
+        self.butt_frame  = self.create_button_frame()
+        self.digits = {
+            7:(1,1), 8:(1,2), 9:(1,3),
+            4:(2,1), 5:(2,2), 6:(2,3),
+            1:(3,1), 2:(3,2), 3:(3,3),
+            0:(4,2), ".":(4,3) 
+        }
 
-button3 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                         text_color='white')
-
-button4 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white')
-
-button5 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white')
-
-button6 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white')
-
-button7 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white')
-
-button8 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white')
-
-button9 = ctk.CTkButton(window, text= 'a btton', fg_color='blue',
-                        text_color='white')
-
-                        
-window.columnconfigure(0, weight= 1)
-window.columnconfigure(1, weight= 1)
-window.columnconfigure(2, weight= 1)
-window.columnconfigure(3, weight= 1)
-
-window.rowconfigure(0, weight= 1)
-window.rowconfigure(1, weight= 1)
-window.rowconfigure(2, weight= 1)
-window.rowconfigure(3, weight= 1)
-window.rowconfigure(4, weight= 1)
-window.rowconfigure(5, weight= 1)
-
-opt_label.grid(row = 0)
-button1.grid(row = 4, column = 0)
-button2.grid(row = 4 , column = 1)
-button3.grid(row = 4, column = 2)
-button4.grid(row = 3, column = 0)
-button5.grid(row = 3, column = 1 )
+        self.create_digit_buttons()
 
 
-# run
-window.mainloop()
+    def run(self):
+        self.window.mainloop()
 
+
+    def create_display_labels(self):
+        total_lable = ctk.CTkLabel(self.display_frame, text = self.total, fg_color="#fcfdfb", anchor = "e", padx =24)
+        total_lable.pack(expand = True, fill = "both")
+
+        current_label = ctk.CTkLabel(self.display_frame, text = self.current_exp, fg_color="#fcfdfb", anchor ="e", padx= 24)
+        current_label.pack(expand = True, fill = "both")
+
+        return total_lable, current_label
+    
+
+    def create_display_frame(self):
+        display_frame = ctk.CTkFrame(self.window, fg_color = "#8D6F3A", border_color= "#FFCC70", border_width= 2, corner_radius= 70)
+        display_frame.pack(expand = True, fill = "both")
+        return display_frame
+    
+
+    def create_button_frame(self):
+        button_frame = ctk.CTkFrame(self.window, fg_color = "#5d7d9a", border_color= "#8f9e8a", border_width= 2)
+        button_frame.pack(expand = True, fill = "both")
+        return button_frame
+    
+    
+    def create_digit_buttons(self):
+
+        for digit,grid_values in self.digits.items():
+            button = ctk.CTkButton(self.butt_frame, text=str(digit), bg_color=WHITE, font = DIGITS_FONT, fg_color="#555555", hover_color= "#333333")
+            button.grid(row = grid_values[0], column = grid_values[1])
+
+
+if __name__ == "__main__":
+    calc = Calculator()
+    calc.run()
