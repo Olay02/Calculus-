@@ -9,7 +9,7 @@ WHITE = "#FFFFFF"
 BLACK = "#111111"
 DIGITS_FONT = ("Arial", 24, "bold")
 HOVER_BUTTON = "#333333"
-FG_COLOR = "#555555"
+FG_COLOR = "#6d6acb"
 
 # func to change modes
 """def  mode():
@@ -65,10 +65,10 @@ class Calculator:
 
 
     def create_display_labels(self):
-        total_lable = ctk.CTkLabel(self.display_frame, text = self.total, font = DIGITS_FONT, fg_color=WHITE, anchor = "e", padx =24)
+        total_lable = ctk.CTkLabel(self.display_frame, text = self.total, font = DIGITS_FONT, fg_color="#d4d4d4", anchor = "e", padx =24)
         total_lable.pack(expand = True, fill = "both")
 
-        current_label = ctk.CTkLabel(self.display_frame, text = self.current_exp,font = DIGITS_FONT, fg_color= WHITE, anchor ="e", padx= 24)
+        current_label = ctk.CTkLabel(self.display_frame, text = self.current_exp,font = DIGITS_FONT, fg_color="#d4d4d4", anchor ="e", padx= 24)
         current_label.pack(expand = True, fill = "both")
 
         return total_lable, current_label 
@@ -127,7 +127,7 @@ class Calculator:
         sub_button = ctk.CTkButton(self.butt_frame, text="", image = sub_img, border_width=0, hover_color=HOVER_BUTTON, fg_color=FG_COLOR, bg_color=BLACK, command = lambda: self.obj.append_operator("-"))
         divi_button = ctk.CTkButton(self.butt_frame, text="", image = divi_img, border_width=0, hover_color= HOVER_BUTTON, fg_color=FG_COLOR, bg_color=BLACK, command = lambda: self.obj.append_operator("/"))
         mult_button = ctk.CTkButton(self.butt_frame, text="", image = mult_img, border_width=0, hover_color= HOVER_BUTTON, fg_color=FG_COLOR, bg_color=BLACK, command = lambda: self.obj.append_operator("*"))
-        plsmin_button = ctk.CTkButton(self.butt_frame, text="", image = plsmin_img, border_width=0, hover_color= HOVER_BUTTON, fg_color=FG_COLOR, bg_color=BLACK )
+        plsmin_button = ctk.CTkButton(self.butt_frame, text="+/-", image = plsmin_img, border_width=0, hover_color= HOVER_BUTTON, fg_color=FG_COLOR, bg_color=BLACK )
         equal_button = ctk.CTkButton(self.butt_frame, text="", image = equal_img, border_width=0, hover_color= HOVER_BUTTON, fg_color=FG_COLOR, bg_color=BLACK, command = lambda: self.obj.evaulate())
 
 
